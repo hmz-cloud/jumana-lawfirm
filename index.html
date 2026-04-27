@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jumana Law Firm — Legal Solutions for Business & Individual Needs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
+/* ── RESET & BASE ─────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --purple:#6B1FA0;
@@ -14,6 +15,7 @@
   --purple-light:#8E3ABF;
   --purple-xlight:#F3EDF8;
   --gold:#C9A84C;
+  --gold-dark:#a8872d;
   --dark:#141017;
   --dark2:#1E1828;
   --mid:#4A4356;
@@ -23,303 +25,729 @@
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'DM Sans',sans-serif;
   --radius:4px;
+  --radius-lg:8px;
   --shadow:0 4px 32px rgba(107,31,160,.12);
   --shadow-lg:0 12px 64px rgba(107,31,160,.18);
+  --transition:.25s ease;
 }
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--sans);color:var(--mid);background:var(--white);overflow-x:hidden}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);color:var(--mid);background:var(--white);overflow-x:hidden;line-height:1.6}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:var(--sans)}
+ul{list-style:none}
 
-/* ── UTILITIES ─────────────────────────────── */
+/* ── UTILITIES ─────────────────────────────────── */
 .container{max-width:1180px;margin:0 auto;padding:0 32px}
 .section{padding:96px 0}
 .section--dark{background:var(--dark2);color:var(--white)}
 .section--light{background:var(--light)}
 .section--purple{background:var(--purple)}
-.tag{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);display:block;margin-bottom:12px}
-.tag--light{color:rgba(255,255,255,.6)}
+.tag{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);display:block;margin-bottom:14px}
+.tag--light{color:rgba(255,255,255,.55)}
 .h-serif{font-family:var(--serif);font-weight:600;line-height:1.15;letter-spacing:-.01em}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;font-size:14px;font-weight:600;letter-spacing:.04em;border-radius:var(--radius);transition:all .25s ease;border:2px solid transparent}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;font-size:14px;font-weight:600;
+  letter-spacing:.04em;border-radius:var(--radius);
+  transition:all var(--transition);border:2px solid transparent;
+  white-space:nowrap;cursor:pointer;
+}
 .btn--primary{background:var(--purple);color:var(--white);border-color:var(--purple)}
-.btn--primary:hover{background:var(--purple-dark);border-color:var(--purple-dark);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn--primary:hover{background:var(--purple-dark);border-color:var(--purple-dark);transform:translateY(-2px);box-shadow:var(--shadow)}
 .btn--ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
 .btn--ghost:hover{background:rgba(255,255,255,.1);border-color:var(--white)}
 .btn--outline{background:transparent;color:var(--purple);border-color:var(--purple)}
-.btn--outline:hover{background:var(--purple);color:var(--white)}
+.btn--outline:hover{background:var(--purple);color:var(--white);transform:translateY(-2px)}
 .btn--gold{background:var(--gold);color:var(--white);border-color:var(--gold)}
-.btn--gold:hover{background:#a8872d;border-color:#a8872d;transform:translateY(-1px)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.btn--gold:hover{background:var(--gold-dark);border-color:var(--gold-dark);transform:translateY(-2px);box-shadow:0 4px 20px rgba(201,168,76,.3)}
+
+/* GRIDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
-/* ── HEADER ─────────────────────────────────── */
-.header{position:fixed;top:0;left:0;right:0;z-index:999;transition:all .3s ease}
-.header__inner{display:flex;align-items:center;justify-content:space-between;height:80px}
-.header.scrolled{background:rgba(20,16,23,.96);backdrop-filter:blur(12px);box-shadow:0 2px 24px rgba(0,0,0,.3)}
-.logo{display:flex;align-items:center;gap:12px}
-.logo__icon{width:38px;height:38px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--white)}
-.logo__text{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);letter-spacing:.02em}
-.logo__text span{display:block;font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:1px}
-nav{display:flex;align-items:center;gap:8px}
-nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.8);padding:8px 14px;border-radius:var(--radius);transition:all .2s;letter-spacing:.02em}
-nav a:hover,nav a.active{color:var(--white);background:rgba(255,255,255,.08)}
-.header__cta{display:flex;align-items:center;gap:16px;margin-left:8px}
-.header__phone{font-size:13px;color:rgba(255,255,255,.7);font-weight:500}
+/* SECTION HEADERS */
+.section-header{text-align:center;max-width:640px;margin:0 auto 64px}
+.section-header--left{text-align:left;margin:0 0 48px}
+.section-title{font-family:var(--serif);font-size:clamp(1.9rem,3vw,2.6rem);font-weight:600;color:var(--dark);line-height:1.18;margin-bottom:16px;letter-spacing:-.02em}
+.section-title--light{color:var(--white)}
+.section-sub{font-size:16px;line-height:1.8;color:var(--mid);font-weight:300}
+.section-sub--light{color:rgba(255,255,255,.55)}
+
+/* ── HEADER ─────────────────────────────────────── */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  transition:all .35s ease;
+}
+.header__inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:16px}
+.header.scrolled{
+  background:rgba(20,16,23,.97);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 2px 32px rgba(0,0,0,.35);
+}
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo__icon{
+  width:38px;height:38px;background:var(--purple);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--white);flex-shrink:0;
+}
+.logo__text{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);letter-spacing:.02em;line-height:1.1}
+.logo__text span{display:block;font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:2px}
+nav{display:flex;align-items:center;gap:4px}
+nav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);padding:8px 13px;border-radius:var(--radius);transition:all .2s;letter-spacing:.02em}
+nav a:hover,nav a.active{color:var(--white);background:rgba(255,255,255,.1)}
+.header__cta{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.header__phone{font-size:13px;color:rgba(255,255,255,.65);font-weight:500;white-space:nowrap}
 .header__phone span{color:var(--gold)}
 
-/* ── HERO ───────────────────────────────────── */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--dark)}
+/* Mobile Menu Button */
+.mobile-menu-btn{
+  display:none;flex-direction:column;gap:5px;
+  padding:8px;background:none;border:none;cursor:pointer;
+  z-index:1001;
+}
+.mobile-menu-btn span{
+  width:22px;height:2px;background:rgba(255,255,255,.85);
+  display:block;transition:all .3s ease;transform-origin:center;
+}
+.mobile-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.mobile-menu-btn.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.mobile-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile Nav */
+.mobile-nav{
+  display:none;position:fixed;inset:0;
+  background:var(--dark);z-index:998;
+  padding:100px 32px 48px;
+  flex-direction:column;gap:0;
+  overflow-y:auto;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  font-family:var(--serif);font-size:1.9rem;
+  color:rgba(255,255,255,.7);
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-weight:600;
+  transition:color .2s, padding-left .2s;
+}
+.mobile-nav a:hover{color:var(--white);padding-left:8px}
+.mobile-nav a:last-child{border-bottom:none;color:var(--gold)}
+.mobile-nav__cta{margin-top:32px}
+.mobile-nav__phone{font-size:15px;color:rgba(255,255,255,.4);margin-top:24px}
+.mobile-nav__phone span{color:var(--gold)}
+
+/* ── HERO ───────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;background:var(--dark);
+  padding-top:80px;
+}
 .hero__bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d0810 0%,#1a0a28 40%,#0f0614 100%)}
-.hero__pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 70% 50%,rgba(107,31,160,.35) 0%,transparent 55%),radial-gradient(circle at 20% 80%,rgba(201,168,76,.08) 0%,transparent 40%);pointer-events:none}
+.hero__pattern{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 72% 48%,rgba(107,31,160,.38) 0%,transparent 52%),
+    radial-gradient(circle at 18% 82%,rgba(201,168,76,.07) 0%,transparent 40%);
+}
 .hero__lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero__lines svg{position:absolute;right:-5%;top:10%;width:55%;opacity:.07}
-.hero__content{position:relative;z-index:2;max-width:720px}
+.hero__content{position:relative;z-index:2;max-width:720px;padding:60px 0 40px}
 .hero__tag{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.hero__tag-line{width:32px;height:1px;background:var(--gold)}
+.hero__tag-line{width:32px;height:1px;background:var(--gold);flex-shrink:0}
 .hero__tag-text{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero__title{font-family:var(--serif);font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:24px;letter-spacing:-.02em}
-.hero__title em{font-style:italic;color:rgba(255,255,255,.55)}
-.hero__body{font-size:17px;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:40px;max-width:580px;font-weight:300}
+.hero__title{
+  font-family:var(--serif);
+  font-size:clamp(2.6rem,5vw,4.2rem);
+  font-weight:600;color:var(--white);
+  line-height:1.08;margin-bottom:24px;letter-spacing:-.02em;
+}
+.hero__title em{font-style:italic;color:rgba(255,255,255,.5)}
+.hero__body{
+  font-size:17px;line-height:1.8;
+  color:rgba(255,255,255,.6);
+  margin-bottom:40px;max-width:580px;font-weight:300;
+}
 .hero__ctas{display:flex;gap:16px;flex-wrap:wrap}
-.hero__stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;margin-top:72px;position:relative;z-index:2}
-.hero__stat{background:rgba(255,255,255,.04);padding:28px 20px;text-align:center;backdrop-filter:blur(4px)}
-.hero__stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--white);line-height:1;display:block}
-.hero__stat-num sup{font-size:1.2rem;color:var(--gold)}
-.hero__stat-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:6px;display:block}
-.hero__scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
-.hero__scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,.3));animation:scrollLine 2s ease-in-out infinite}
-@keyframes scrollLine{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
-.hero__scroll-text{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.hero__stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.09);
+  border-radius:var(--radius);overflow:hidden;
+  margin-top:72px;position:relative;z-index:2;
+}
+.hero__stat{
+  background:rgba(255,255,255,.04);
+  padding:28px 20px;text-align:center;
+  backdrop-filter:blur(4px);
+}
+.hero__stat-num{
+  font-family:var(--serif);font-size:2.3rem;
+  font-weight:700;color:var(--white);
+  line-height:1;display:block;
+}
+.hero__stat-num sup{font-size:1.1rem;color:var(--gold)}
+.hero__stat-label{
+  font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+  margin-top:8px;display:block;
+}
+.hero__scroll{
+  position:absolute;bottom:36px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+}
+.hero__scroll-line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,.3));
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%,100%{opacity:.3;transform:scaleY(1)}
+  50%{opacity:1;transform:scaleY(1.2)}
+}
+.hero__scroll-text{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28)}
 
-/* ── TRUST BANNER ───────────────────────────── */
-.trust{padding:0;background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-.trust__inner{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:32px 0;flex-wrap:wrap}
-.trust__item{display:flex;align-items:center;gap:16px;flex:1;min-width:160px}
-.trust__icon{width:44px;height:44px;background:rgba(107,31,160,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid rgba(107,31,160,.3)}
-.trust__num{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--white);line-height:1}
-.trust__label{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
-.trust__divider{width:1px;height:40px;background:rgba(255,255,255,.08)}
+/* ── TRUST BANNER ───────────────────────────────── */
+.trust{
+  background:var(--dark2);
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.trust__inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:32px 0;flex-wrap:wrap;
+}
+.trust__item{display:flex;align-items:center;gap:14px;flex:1;min-width:150px}
+.trust__icon{
+  width:44px;height:44px;background:rgba(107,31,160,.2);
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:18px;flex-shrink:0;
+  border:1px solid rgba(107,31,160,.3);
+}
+.trust__num{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1;display:block}
+.trust__label{font-size:12px;color:rgba(255,255,255,.38);margin-top:3px;display:block}
+.trust__divider{width:1px;height:40px;background:rgba(255,255,255,.08);flex-shrink:0}
 
-/* ── ABOUT TEASER ───────────────────────────── */
+/* ── ABOUT TEASER ───────────────────────────────── */
 .about-teaser{padding:112px 0}
 .about-teaser__visual{position:relative}
-.about-teaser__img-frame{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(160deg,#1a0a28,#2d1254);display:flex;align-items:center;justify-content:center}
-.about-teaser__img-pattern{width:100%;height:100%;background:repeating-linear-gradient(45deg,rgba(107,31,160,.05) 0px,rgba(107,31,160,.05) 1px,transparent 1px,transparent 20px);position:absolute;inset:0}
-.about-teaser__img-icon{font-size:80px;opacity:.15;position:relative;z-index:1}
-.about-teaser__badge{position:absolute;bottom:-20px;right:-20px;background:var(--purple);color:var(--white);padding:28px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow-lg)}
+.about-teaser__img-frame{
+  position:relative;border-radius:2px;overflow:hidden;
+  aspect-ratio:4/5;
+  background:linear-gradient(160deg,#1a0a28,#2d1254);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-teaser__img-pattern{
+  width:100%;height:100%;
+  background:repeating-linear-gradient(
+    45deg,
+    rgba(107,31,160,.05) 0px,rgba(107,31,160,.05) 1px,
+    transparent 1px,transparent 20px
+  );
+  position:absolute;inset:0;
+}
+.about-teaser__img-icon{font-size:80px;opacity:.13;position:relative;z-index:1}
+.about-teaser__badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--purple);color:var(--white);
+  padding:28px 32px;border-radius:var(--radius);
+  text-align:center;box-shadow:var(--shadow-lg);
+}
 .about-teaser__badge-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;display:block;line-height:1}
-.about-teaser__badge-text{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-top:4px;display:block}
-.about-teaser__text{padding-left:16px}
-.about-teaser__title{font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:600;color:var(--dark);line-height:1.15;margin-bottom:24px;letter-spacing:-.02em}
-.about-teaser__body{font-size:16px;line-height:1.8;color:var(--mid);margin-bottom:24px;font-weight:300}
-.checklist{list-style:none;margin:28px 0 36px}
-.checklist li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--mid);padding:8px 0;border-bottom:1px solid var(--border)}
-.checklist li::before{content:"✦";color:var(--purple);font-size:11px;margin-top:3px;flex-shrink:0}
+.about-teaser__badge-text{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;margin-top:6px;display:block}
+.about-teaser__text{padding-left:8px}
+.about-teaser__title{
+  font-family:var(--serif);
+  font-size:clamp(1.9rem,3.2vw,2.7rem);
+  font-weight:600;color:var(--dark);
+  line-height:1.15;margin-bottom:20px;letter-spacing:-.02em;
+}
+.about-teaser__body{font-size:16px;line-height:1.82;color:var(--mid);margin-bottom:20px;font-weight:300}
+.checklist{margin:28px 0 36px}
+.checklist li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:15px;color:var(--mid);
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.checklist li::before{content:"✦";color:var(--purple);font-size:10px;margin-top:4px;flex-shrink:0}
 
-/* ── PRACTICE AREAS ─────────────────────────── */
-.services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:56px}
-.service-card{background:var(--white);padding:40px 36px;transition:all .3s ease;cursor:pointer;position:relative;overflow:hidden}
-.service-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--purple);transition:height .3s ease}
+/* ── PRACTICE AREAS ─────────────────────────────── */
+.services__grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:var(--border);margin-top:56px;
+}
+.service-card{
+  background:var(--white);padding:40px 36px;
+  transition:all .3s ease;cursor:pointer;
+  position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:0;background:var(--purple);
+  transition:height .35s ease;
+}
 .service-card:hover::before{height:100%}
-.service-card:hover{background:var(--purple-xlight);transform:translateY(-2px)}
-.service-card__icon{font-size:32px;margin-bottom:20px;display:block}
-.service-card__title{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--dark);margin-bottom:12px;line-height:1.3}
-.service-card__body{font-size:14px;line-height:1.7;color:var(--mid);margin-bottom:20px;font-weight:300}
+.service-card:hover{background:var(--purple-xlight);transform:translateY(-3px);box-shadow:var(--shadow)}
+.service-card__icon{font-size:30px;margin-bottom:18px;display:block}
+.service-card__title{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--dark);margin-bottom:12px;line-height:1.3}
+.service-card__body{font-size:14px;line-height:1.75;color:var(--mid);margin-bottom:20px;font-weight:300}
 .service-card__link{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);display:flex;align-items:center;gap:6px;transition:gap .2s}
 .service-card:hover .service-card__link{gap:10px}
 
-/* ── CTA BANNER ─────────────────────────────── */
+/* ── CTA BANNER ─────────────────────────────────── */
 .cta-banner{background:linear-gradient(135deg,var(--purple-dark),var(--purple));padding:72px 0}
-.cta-banner__inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
-.cta-banner__title{font-family:var(--serif);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:600;color:var(--white);line-height:1.25}
+.cta-banner__inner{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:32px;flex-wrap:wrap;
+}
+.cta-banner__title{
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,2.6vw,2.1rem);
+  font-weight:600;color:var(--white);line-height:1.25;
+}
 .cta-banner__sub{font-size:15px;color:rgba(255,255,255,.6);margin-top:8px;font-weight:300}
 
-/* ── ATTORNEYS ──────────────────────────────── */
-.attorney-card{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--white);box-shadow:0 2px 16px rgba(0,0,0,.07);transition:all .3s ease}
+/* ── PROCESS ─────────────────────────────────────── */
+.process-card{
+  text-align:center;padding:36px 28px;
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  position:relative;transition:all .3s ease;
+  background:var(--white);
+}
+.process-card:hover{border-color:var(--purple);box-shadow:var(--shadow);transform:translateY(-4px)}
+.process-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--purple);color:var(--white);
+  font-family:var(--serif);font-size:1.4rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.process-num--gold{background:var(--gold)}
+.process-card h3{font-family:var(--serif);font-size:1.15rem;color:var(--dark);margin-bottom:10px}
+.process-card p{font-size:14px;line-height:1.75;color:var(--mid);font-weight:300}
+
+/* ── ATTORNEYS ──────────────────────────────────── */
+.attorney-card{
+  position:relative;overflow:hidden;border-radius:var(--radius);
+  background:var(--white);box-shadow:0 2px 16px rgba(0,0,0,.07);
+  transition:all .3s ease;
+}
 .attorney-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-.attorney-card__photo{aspect-ratio:3/4;background:linear-gradient(160deg,#1a0a28,#3d1870);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.attorney-card__photo-icon{font-size:64px;opacity:.2;color:var(--white)}
-.attorney-card__photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(74,15,114,.8) 0%,transparent 50%)}
+.attorney-card__photo{
+  aspect-ratio:3/4;
+  background:linear-gradient(160deg,#1a0a28,#3d1870);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.attorney-card__photo-icon{font-size:64px;opacity:.18;color:var(--white)}
+.attorney-card__photo-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(74,15,114,.8) 0%,transparent 55%);
+}
 .attorney-card__info{padding:24px}
 .attorney-card__name{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--dark);margin-bottom:4px}
 .attorney-card__role{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:16px}
 .attorney-card__socials{display:flex;gap:10px}
-.social-btn{width:32px;height:32px;border-radius:50%;background:var(--purple-xlight);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--purple);transition:all .2s}
+.social-btn{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--purple-xlight);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--purple);transition:all .2s;
+}
 .social-btn:hover{background:var(--purple);color:var(--white)}
 
-/* ── STATS ──────────────────────────────────── */
+/* ── STATS ──────────────────────────────────────── */
 .stats-section{background:linear-gradient(135deg,var(--dark) 0%,#1a0a28 100%);padding:80px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08)}
-.stat-item{background:rgba(255,255,255,.03);padding:48px 32px;text-align:center}
+.stat-item{background:rgba(255,255,255,.03);padding:52px 32px;text-align:center}
 .stat-item__num{font-family:var(--serif);font-size:3.2rem;font-weight:700;color:var(--white);line-height:1;display:block}
 .stat-item__num span{color:var(--gold)}
-.stat-item__label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:10px}
+.stat-item__label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);display:block;margin-top:12px}
 .stat-item__bar{width:40px;height:2px;background:var(--purple);margin:16px auto 0;display:block}
 
-/* ── TESTIMONIALS ───────────────────────────── */
+/* ── TESTIMONIALS ───────────────────────────────── */
 .testimonials{background:var(--light);padding:112px 0}
 .testimonial-slider{position:relative;margin-top:56px;overflow:hidden}
 .testimonial-track{display:flex;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
 .testimonial-slide{flex:0 0 100%;padding:0 16px}
-.testimonial-card{background:var(--white);border-radius:var(--radius);padding:56px 64px;box-shadow:0 4px 32px rgba(0,0,0,.06);position:relative;overflow:hidden}
-.testimonial-card::before{content:'"';font-family:var(--serif);font-size:12rem;color:var(--purple-xlight);position:absolute;top:-20px;left:32px;line-height:1;pointer-events:none}
-.testimonial-card__text{font-family:var(--serif);font-size:1.35rem;font-weight:400;font-style:italic;color:var(--dark);line-height:1.65;position:relative;z-index:1;margin-bottom:36px}
+.testimonial-card{
+  background:var(--white);border-radius:var(--radius);
+  padding:56px 64px;box-shadow:0 4px 32px rgba(0,0,0,.06);
+  position:relative;overflow:hidden;
+}
+.testimonial-card::before{
+  content:'"';font-family:var(--serif);
+  font-size:12rem;color:var(--purple-xlight);
+  position:absolute;top:-20px;left:32px;
+  line-height:1;pointer-events:none;
+}
+.testimonial-card__text{
+  font-family:var(--serif);font-size:1.3rem;
+  font-weight:400;font-style:italic;color:var(--dark);
+  line-height:1.7;position:relative;z-index:1;margin-bottom:36px;
+}
 .testimonial-card__author{display:flex;align-items:center;gap:20px}
-.testimonial-card__avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-light));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;color:var(--white);font-weight:600;flex-shrink:0}
+.testimonial-card__avatar{
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--purple-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.4rem;
+  color:var(--white);font-weight:600;flex-shrink:0;
+}
 .testimonial-card__name{font-size:15px;font-weight:600;color:var(--dark)}
-.testimonial-card__title{font-size:13px;color:var(--purple);margin-top:2px}
-.testimonial-stars{color:var(--gold);font-size:14px;margin-bottom:4px;letter-spacing:2px}
+.testimonial-card__title{font-size:13px;color:var(--purple);margin-top:3px}
+.testimonial-stars{color:var(--gold);font-size:14px;margin-bottom:8px;letter-spacing:2px}
 .slider-controls{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:40px}
-.slider-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--mid);transition:all .2s;cursor:pointer}
-.slider-btn:hover{border-color:var(--purple);color:var(--purple)}
-.slider-dots{display:flex;gap:8px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer;border:none}
+.slider-btn{
+  width:44px;height:44px;border-radius:50%;
+  border:2px solid var(--border);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--mid);transition:all .2s;cursor:pointer;
+}
+.slider-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-xlight)}
+.slider-dots{display:flex;gap:8px;align-items:center}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);transition:all .3s;
+  cursor:pointer;border:none;
+}
 .dot.active{background:var(--purple);width:24px;border-radius:4px}
 
-/* ── BLOG ───────────────────────────────────── */
-.blog-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:all .3s ease}
-.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.blog-card__thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#1a0a28,#3d1870);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.blog-card__thumb-icon{font-size:48px;opacity:.15;color:var(--white)}
-.blog-card__thumb-cat{position:absolute;top:16px;left:16px;background:var(--purple);color:var(--white);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px}
-.blog-card__body{padding:28px}
-.blog-card__date{font-size:12px;color:var(--mid);margin-bottom:10px;font-weight:400;opacity:.7}
-.blog-card__title{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--dark);line-height:1.35;margin-bottom:12px;transition:color .2s}
-.blog-card:hover .blog-card__title{color:var(--purple)}
-.blog-card__excerpt{font-size:14px;line-height:1.7;color:var(--mid);margin-bottom:20px;font-weight:300}
-.blog-card__link{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);display:flex;align-items:center;gap:6px}
+/* ── FAQ ────────────────────────────────────────── */
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-question{
+  width:100%;text-align:left;padding:22px 0;
+  background:none;border:none;font-size:16px;font-weight:500;
+  color:var(--dark);display:flex;justify-content:space-between;
+  align-items:center;cursor:pointer;gap:16px;font-family:var(--sans);
+  transition:color .2s;
+}
+.faq-question:hover{color:var(--purple)}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--purple-xlight);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--purple);flex-shrink:0;transition:all .3s;
+}
+.faq-item.open .faq-icon{background:var(--purple);color:var(--white);transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-item.open .faq-answer{max-height:320px;padding-bottom:24px}
+.faq-answer-text{font-size:15px;line-height:1.78;color:var(--mid);font-weight:300}
 
-/* ── CONSULTATION FORM ──────────────────────── */
+/* ── PRICING ────────────────────────────────────── */
+.pricing-card{
+  background:var(--white);border:2px solid var(--border);
+  border-radius:var(--radius-lg);padding:40px 36px;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.pricing-card--featured{
+  background:linear-gradient(160deg,var(--purple-dark),var(--purple));
+  border-color:var(--purple);box-shadow:var(--shadow-lg);
+}
+.pricing-card--featured::before{
+  content:'Most Popular';
+  position:absolute;top:22px;right:-26px;
+  background:var(--gold);color:var(--white);
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 40px;transform:rotate(45deg);width:120px;text-align:center;
+}
+.pricing-card:hover{border-color:var(--purple);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pricing-card--featured:hover{transform:translateY(-4px)}
+.pricing-card__icon{font-size:30px;margin-bottom:16px}
+.pricing-card__title{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--dark);margin-bottom:8px}
+.pricing-card--featured .pricing-card__title{color:var(--white)}
+.pricing-card__price{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--purple);line-height:1;margin-bottom:4px}
+.pricing-card--featured .pricing-card__price{color:var(--white)}
+.pricing-card__price sup{font-size:1.1rem;color:var(--mid);font-weight:400}
+.pricing-card--featured .pricing-card__price sup{color:rgba(255,255,255,.55)}
+.pricing-card__period{font-size:13px;color:var(--mid);margin-bottom:28px}
+.pricing-card--featured .pricing-card__period{color:rgba(255,255,255,.5)}
+.pricing-features{margin-bottom:32px}
+.pricing-features li{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;color:var(--mid);
+  padding:9px 0;border-bottom:1px solid var(--border);
+}
+.pricing-card--featured .pricing-features li{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.1)}
+.pricing-features li::before{content:"✓";color:var(--purple);font-weight:700;font-size:13px;flex-shrink:0}
+.pricing-card--featured .pricing-features li::before{color:var(--gold)}
+
+/* ── CONSULTATION FORM ──────────────────────────── */
 .consultation{background:var(--dark2);padding:112px 0}
-.consultation__inner{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
-.consultation__intro .tag--light{margin-bottom:16px}
-.consultation__title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;color:var(--white);line-height:1.2;margin-bottom:20px}
-.consultation__body{font-size:15px;line-height:1.8;color:rgba(255,255,255,.55);margin-bottom:36px;font-weight:300}
-.consultation__features{list-style:none}
-.consultation__features li{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.6);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.consultation__inner{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:start}
+.consultation__title{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,2.8vw,2.5rem);
+  font-weight:600;color:var(--white);line-height:1.2;margin-bottom:20px;
+}
+.consultation__body{font-size:15px;line-height:1.82;color:rgba(255,255,255,.52);margin-bottom:36px;font-weight:300}
+.consultation__features li{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;color:rgba(255,255,255,.58);
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);
+}
 .consultation__features li::before{content:"✦";color:var(--gold);font-size:10px;flex-shrink:0}
-.consultation__form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:40px}
+.consultation__form{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:var(--radius-lg);padding:40px;
+}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-group{margin-bottom:16px}
-.form-group--full{grid-column:1/-1}
-.form-label{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
-.form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:12px 16px;font-size:14px;color:var(--white);font-family:var(--sans);transition:border-color .2s;outline:none}
-.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.25)}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--purple-light)}
-.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.form-label{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:13px 16px;
+  font-size:14px;color:var(--white);
+  font-family:var(--sans);transition:border-color .2s,background .2s;outline:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.22)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--purple-light);background:rgba(255,255,255,.08);
+}
+.form-select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  cursor:pointer;
+}
 .form-select option{background:var(--dark);color:var(--white)}
-.form-textarea{resize:vertical;min-height:100px}
-.form-submit{width:100%;padding:16px;background:var(--purple);color:var(--white);border:none;border-radius:var(--radius);font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s ease;margin-top:8px}
-.form-submit:hover{background:var(--purple-dark);transform:translateY(-1px);box-shadow:var(--shadow)}
+.form-textarea{resize:vertical;min-height:110px}
+.form-submit{
+  width:100%;padding:16px;background:var(--purple);
+  color:var(--white);border:none;border-radius:var(--radius);
+  font-size:14px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;cursor:pointer;
+  transition:all .25s ease;margin-top:8px;
+}
+.form-submit:hover{background:var(--purple-dark);transform:translateY(-2px);box-shadow:var(--shadow)}
+.form-submit:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.form-note{font-size:12px;color:rgba(255,255,255,.28);margin-top:12px;text-align:center;line-height:1.6}
 
-/* ── CONTACT ────────────────────────────────── */
+/* ── BLOG ───────────────────────────────────────── */
+.blog-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:all .3s ease}
+.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.blog-card__thumb{
+  aspect-ratio:16/9;
+  background:linear-gradient(135deg,#1a0a28,#3d1870);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.blog-card__thumb-icon{font-size:48px;opacity:.13;color:var(--white)}
+.blog-card__thumb-cat{
+  position:absolute;top:16px;left:16px;
+  background:var(--purple);color:var(--white);
+  font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 11px;border-radius:2px;
+}
+.blog-card__body{padding:28px}
+.blog-card__date{font-size:12px;color:var(--mid);margin-bottom:10px;opacity:.65}
+.blog-card__title{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--dark);line-height:1.35;margin-bottom:12px;transition:color .2s}
+.blog-card:hover .blog-card__title{color:var(--purple)}
+.blog-card__excerpt{font-size:14px;line-height:1.72;color:var(--mid);margin-bottom:20px;font-weight:300}
+.blog-card__link{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);display:flex;align-items:center;gap:6px;transition:gap .2s}
+.blog-card:hover .blog-card__link{gap:10px}
+
+/* ── CONTACT ────────────────────────────────────── */
 .contact-section{padding:112px 0}
-.contact-info{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:48px}
-.contact-card{background:var(--purple-xlight);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:flex;gap:16px;align-items:flex-start;transition:all .2s}
+.contact-card{
+  background:var(--purple-xlight);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  display:flex;gap:16px;align-items:flex-start;transition:all .25s;
+}
 .contact-card:hover{border-color:var(--purple);background:var(--white);box-shadow:var(--shadow)}
-.contact-card__icon{width:48px;height:48px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-card__icon{
+  width:48px;height:48px;background:var(--purple);
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:20px;flex-shrink:0;
+}
 .contact-card__label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
-.contact-card__value{font-size:15px;color:var(--dark);font-weight:500;line-height:1.5}
-.map-frame{border-radius:var(--radius);overflow:hidden;height:360px;background:linear-gradient(135deg,#1a0a28,#2d1254);display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--border)}
+.contact-card__value{font-size:15px;color:var(--dark);font-weight:500;line-height:1.55}
+.map-frame{
+  border-radius:var(--radius);overflow:hidden;height:360px;
+  background:linear-gradient(135deg,#1a0a28,#2d1254);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;border:1px solid var(--border);
+}
 .map-placeholder{text-align:center;color:rgba(255,255,255,.4)}
 .map-placeholder__icon{font-size:48px;margin-bottom:12px}
 .map-placeholder__text{font-size:14px;letter-spacing:.06em;text-transform:uppercase}
 
-/* ── FOOTER ─────────────────────────────────── */
+/* ── FOOTER ─────────────────────────────────────── */
 .footer{background:var(--dark);padding:80px 0 0}
-.footer__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer__grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:48px;padding-bottom:64px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
 .footer__logo{margin-bottom:20px}
-.footer__tagline{font-size:14px;line-height:1.75;color:rgba(255,255,255,.4);margin-bottom:28px;font-weight:300}
+.footer__tagline{font-size:14px;line-height:1.78;color:rgba(255,255,255,.38);margin-bottom:28px;font-weight:300}
 .footer__socials{display:flex;gap:10px}
-.footer__social-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.5);transition:all .2s}
+.footer__social-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:rgba(255,255,255,.45);transition:all .2s;
+}
 .footer__social-btn:hover{background:var(--purple);border-color:var(--purple);color:var(--white)}
-.footer__col-title{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px}
-.footer__links{list-style:none}
+.footer__col-title{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:24px}
 .footer__links li{margin-bottom:12px}
-.footer__links a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;font-weight:300}
+.footer__links a{font-size:14px;color:rgba(255,255,255,.45);transition:color .2s;font-weight:300}
 .footer__links a:hover{color:var(--white)}
-.footer__contact-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.5);margin-bottom:14px;font-weight:300;line-height:1.5}
+.footer__contact-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:rgba(255,255,255,.45);
+  margin-bottom:14px;font-weight:300;line-height:1.55;
+}
 .footer__contact-icon{color:var(--purple);flex-shrink:0;margin-top:2px}
-.footer__bottom{padding:24px 0;display:flex;align-items:center;justify-content:space-between}
-.footer__copy{font-size:13px;color:rgba(255,255,255,.25)}
-.footer__bottom-links{display:flex;gap:24px}
-.footer__bottom-links a{font-size:13px;color:rgba(255,255,255,.25);transition:color .2s}
+.footer__bottom{
+  padding:24px 0;display:flex;
+  align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.footer__copy{font-size:13px;color:rgba(255,255,255,.22)}
+.footer__bottom-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer__bottom-links a{font-size:13px;color:rgba(255,255,255,.22);transition:color .2s}
 .footer__bottom-links a:hover{color:rgba(255,255,255,.6)}
 
-/* ── PAGE SECTIONS ──────────────────────────── */
-.page-hero{padding:180px 0 80px;background:linear-gradient(135deg,var(--dark) 0%,#1a0a28 100%);position:relative;overflow:hidden}
-.page-hero::after{content:'';position:absolute;right:0;top:0;bottom:0;width:40%;background:radial-gradient(ellipse at right,rgba(107,31,160,.3),transparent 70%);pointer-events:none}
-.page-hero__title{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600;color:var(--white);line-height:1.15;margin-bottom:16px}
-.page-hero__sub{font-size:17px;color:rgba(255,255,255,.55);font-weight:300;max-width:560px;line-height:1.7}
-.breadcrumb{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.35);margin-bottom:24px}
-.breadcrumb a{color:rgba(255,255,255,.5);transition:color .2s}
-.breadcrumb a:hover{color:var(--white)}
-.breadcrumb span{color:var(--gold)}
-
-/* ── FAQ ────────────────────────────────────── */
-.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
-.faq-question{width:100%;text-align:left;padding:24px 0;background:none;border:none;font-size:16px;font-weight:500;color:var(--dark);display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:16px;font-family:var(--sans)}
-.faq-question:hover{color:var(--purple)}
-.faq-icon{width:28px;height:28px;border-radius:50%;background:var(--purple-xlight);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--purple);flex-shrink:0;transition:all .3s}
-.faq-item.open .faq-icon{background:var(--purple);color:var(--white);transform:rotate(45deg)}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
-.faq-item.open .faq-answer{max-height:300px;padding-bottom:24px}
-.faq-answer-text{font-size:15px;line-height:1.75;color:var(--mid);font-weight:300}
-
-/* ── PRICING ────────────────────────────────── */
-.pricing-card{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);padding:40px 36px;transition:all .3s;position:relative;overflow:hidden}
-.pricing-card--featured{border-color:var(--purple);box-shadow:var(--shadow-lg)}
-.pricing-card--featured::before{content:'Most Popular';position:absolute;top:20px;right:-28px;background:var(--gold);color:var(--white);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 40px;transform:rotate(45deg);width:120px;text-align:center}
-.pricing-card:hover{border-color:var(--purple);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.pricing-card__icon{font-size:32px;margin-bottom:16px}
-.pricing-card__title{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--dark);margin-bottom:8px}
-.pricing-card__price{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--purple);line-height:1;margin-bottom:4px}
-.pricing-card__price sup{font-size:1.2rem;color:var(--mid);font-weight:400}
-.pricing-card__period{font-size:13px;color:var(--mid);margin-bottom:28px}
-.pricing-features{list-style:none;margin-bottom:32px}
-.pricing-features li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mid);padding:9px 0;border-bottom:1px solid var(--border)}
-.pricing-features li::before{content:"✓";color:var(--purple);font-weight:700;font-size:13px;flex-shrink:0}
-
-/* ── NAV ACTIVE STATES ──────────────────────── */
-.nav-pages{display:none}
-section[id]{scroll-margin-top:80px}
-
-/* ── ANIMATIONS ─────────────────────────────── */
+/* ── ANIMATIONS ─────────────────────────────────── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.animate{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.animate{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .animate.visible{opacity:1;transform:none}
 .animate-delay-1{transition-delay:.1s}
 .animate-delay-2{transition-delay:.2s}
 .animate-delay-3{transition-delay:.3s}
 .animate-delay-4{transition-delay:.4s}
 
-/* ── MOBILE NAV ─────────────────────────────── */
-.mobile-menu-btn{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer}
-.mobile-menu-btn span{width:22px;height:2px;background:rgba(255,255,255,.8);display:block;transition:all .3s}
-.mobile-nav{display:none;position:fixed;inset:0;background:var(--dark);z-index:998;padding:120px 32px 40px;flex-direction:column;gap:4px}
-.mobile-nav.open{display:flex}
-.mobile-nav a{font-family:var(--serif);font-size:2rem;color:rgba(255,255,255,.7);padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);font-weight:600}
-.mobile-nav a:hover{color:var(--white)}
+/* ── BREADCRUMB ─────────────────────────────────── */
+section[id]{scroll-margin-top:80px}
 
-/* ── SECTION HEADERS ────────────────────────── */
-.section-header{text-align:center;max-width:620px;margin:0 auto 64px}
-.section-header--left{text-align:left;margin:0 0 48px}
-.section-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;color:var(--dark);line-height:1.2;margin-bottom:16px;letter-spacing:-.02em}
-.section-title--light{color:var(--white)}
-.section-sub{font-size:16px;line-height:1.75;color:var(--mid);font-weight:300}
-.section-sub--light{color:rgba(255,255,255,.55)}
+/* ─────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+────────────────────────────────────────────────── */
 
-/* ── RESPONSIVE ─────────────────────────────── */
-@media(max-width:1024px){.grid-2{grid-template-columns:1fr}.grid-4{grid-template-columns:repeat(2,1fr)}.footer__grid{grid-template-columns:1fr 1fr}.consultation__inner{grid-template-columns:1fr}}
-@media(max-width:768px){nav,.header__cta{display:none}.mobile-menu-btn{display:flex}.services__grid{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.hero__stats{grid-template-columns:repeat(2,1fr)}.testimonial-card{padding:36px 28px}.form-row{grid-template-columns:1fr}.footer__grid{grid-template-columns:1fr}.contact-info{grid-template-columns:1fr}.container{padding:0 20px}.section{padding:72px 0}.hero__title{font-size:2.4rem}.about-teaser__badge{bottom:-10px;right:0}}
+/* Tablet: ≤1024px */
+@media(max-width:1024px){
+  .container{padding:0 24px}
+  .grid-2{grid-template-columns:1fr;gap:48px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .footer__grid{grid-template-columns:1fr 1fr;gap:40px}
+  .consultation__inner{grid-template-columns:1fr;gap:48px}
+  .hero__stats{grid-template-columns:repeat(2,1fr)}
+  .about-teaser__text{padding-left:0}
+  .about-teaser__badge{right:0;bottom:-16px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .hero__title{font-size:clamp(2.4rem,4.5vw,3.6rem)}
+  .trust__divider{display:none}
+}
+
+/* Mobile: ≤768px */
+@media(max-width:768px){
+  /* Layout */
+  .container{padding:0 20px}
+  .section{padding:72px 0}
+  .about-teaser{padding:72px 0}
+
+  /* Header */
+  nav,.header__cta{display:none}
+  .mobile-menu-btn{display:flex}
+  .header__inner{height:68px}
+  section[id]{scroll-margin-top:68px}
+
+  /* Hero */
+  .hero{padding-top:68px;min-height:100svh}
+  .hero__content{padding:48px 0 32px}
+  .hero__title{font-size:2.2rem}
+  .hero__body{font-size:16px}
+  .hero__ctas{flex-direction:column;gap:12px}
+  .hero__ctas .btn{width:100%;justify-content:center}
+  .hero__stats{grid-template-columns:repeat(2,1fr);margin-top:48px}
+  .hero__stat-num{font-size:1.9rem}
+  .hero__scroll{display:none}
+
+  /* Trust */
+  .trust__inner{gap:16px;padding:24px 0}
+  .trust__item{min-width:calc(50% - 16px)}
+
+  /* About */
+  .about-teaser__badge{position:static;margin-top:24px;display:inline-block;right:auto;bottom:auto}
+  .about-teaser__visual{margin-bottom:16px}
+
+  /* Services */
+  .services__grid{grid-template-columns:1fr}
+
+  /* Grids */
+  .grid-3{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr 1fr}
+
+  /* Stats */
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-item{padding:36px 20px}
+  .stat-item__num{font-size:2.4rem}
+
+  /* Testimonials */
+  .testimonial-card{padding:36px 28px}
+  .testimonial-card::before{font-size:8rem;top:-10px;left:16px}
+  .testimonial-card__text{font-size:1.1rem}
+
+  /* Form */
+  .form-row{grid-template-columns:1fr}
+  .consultation__form{padding:28px 24px}
+
+  /* CTA Banner */
+  .cta-banner{padding:52px 0}
+  .cta-banner__inner{flex-direction:column;text-align:center}
+  .cta-banner__inner .btn{width:100%;justify-content:center;max-width:320px}
+
+  /* Process */
+  .grid-4.process-grid{grid-template-columns:1fr}
+
+  /* FAQ */
+  .faq-question{font-size:15px}
+
+  /* Footer */
+  .footer__grid{grid-template-columns:1fr;gap:36px}
+  .footer{padding:60px 0 0}
+  .footer__bottom{flex-direction:column;text-align:center}
+  .footer__bottom-links{justify-content:center}
+
+  /* Pricing */
+  .grid-3.pricing-grid{grid-template-columns:1fr}
+
+  /* Contact */
+  .contact-section{padding:72px 0}
+  .grid-2.contact-grid{gap:40px}
+
+  /* Blog */
+  .blog-card__body{padding:20px}
+
+  /* Buttons */
+  .btn{padding:13px 24px}
+}
+
+/* Small Mobile: ≤480px */
+@media(max-width:480px){
+  .hero__title{font-size:1.95rem}
+  .hero__stats{grid-template-columns:1fr 1fr}
+  .hero__stat{padding:20px 14px}
+  .hero__stat-num{font-size:1.7rem}
+  .section-title{font-size:1.75rem}
+  .trust__item{min-width:100%}
+  .grid-4{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .stat-item{padding:32px 20px}
+  .testimonial-card{padding:28px 20px}
+  .footer__bottom-links{flex-direction:column;gap:10px}
+}
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ═══════════════════════════════════ -->
+<!-- ══ HEADER ════════════════════════════════════ -->
 <header class="header" id="header">
   <div class="container">
     <div class="header__inner">
@@ -329,7 +757,7 @@ section[id]{scroll-margin-top:80px}
           <span>Law Firm</span>
         </div>
       </a>
-      <nav>
+      <nav aria-label="Main navigation">
         <a href="#home" class="active">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About Us</a>
@@ -339,39 +767,38 @@ section[id]{scroll-margin-top:80px}
       </nav>
       <div class="header__cta">
         <div class="header__phone">📞 <span>(888) 555-9898</span></div>
-        <a href="#consultation" class="btn btn--primary" style="padding:10px 22px;font-size:13px">Free Consultation</a>
+        <a href="#consultation" class="btn btn--primary" style="padding:10px 20px;font-size:13px">Free Consultation</a>
       </div>
-      <button class="mobile-menu-btn" id="mobileBtn" aria-label="Open menu">
+      <button class="mobile-menu-btn" id="mobileBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobileNav">
+<!-- ══ MOBILE NAV ════════════════════════════════ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <a href="#home" onclick="closeMobile()">Home</a>
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="#about" onclick="closeMobile()">About Us</a>
   <a href="#attorneys" onclick="closeMobile()">Attorneys</a>
   <a href="#blog" onclick="closeMobile()">Blog</a>
   <a href="#contact" onclick="closeMobile()">Contact</a>
-  <a href="#consultation" onclick="closeMobile()" style="color:var(--gold)">Free Consultation</a>
-</div>
+  <a href="#consultation" onclick="closeMobile()">Free Consultation →</a>
+  <div class="mobile-nav__phone">📞 <span>(888) 555-9898</span></div>
+</nav>
 
 <!-- ══ HERO ══════════════════════════════════════ -->
 <section class="hero" id="home">
   <div class="hero__bg"></div>
   <div class="hero__pattern"></div>
   <div class="hero__lines">
-    <svg viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="250" cy="300" r="240" stroke="white" stroke-width="0.5"/>
-      <circle cx="250" cy="300" r="180" stroke="white" stroke-width="0.5"/>
-      <circle cx="250" cy="300" r="120" stroke="white" stroke-width="0.5"/>
-      <line x1="10" y1="300" x2="490" y2="300" stroke="white" stroke-width="0.5"/>
-      <line x1="250" y1="10" x2="250" y2="590" stroke="white" stroke-width="0.5"/>
-      <line x1="80" y1="80" x2="420" y2="520" stroke="white" stroke-width="0.3"/>
-      <line x1="420" y1="80" x2="80" y2="520" stroke="white" stroke-width="0.3"/>
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="300" r="280" fill="none" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="220" fill="none" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="160" fill="none" stroke="white" stroke-width="1"/>
+      <line x1="20" y1="300" x2="580" y2="300" stroke="white" stroke-width="1"/>
+      <line x1="300" y1="20" x2="300" y2="580" stroke="white" stroke-width="1"/>
     </svg>
   </div>
   <div class="container" style="position:relative;z-index:2;width:100%">
@@ -394,11 +821,11 @@ section[id]{scroll-margin-top:80px}
       </div>
       <div class="hero__stat">
         <span class="hero__stat-num">98<sup>%</sup></span>
-        <span class="hero__stat-label">Case Success Rate</span>
+        <span class="hero__stat-label">Success Rate</span>
       </div>
       <div class="hero__stat">
         <span class="hero__stat-num">32</span>
-        <span class="hero__stat-label">Years of Experience</span>
+        <span class="hero__stat-label">Years Experience</span>
       </div>
       <div class="hero__stat">
         <span class="hero__stat-num">1,800<sup>+</sup></span>
@@ -406,11 +833,58 @@ section[id]{scroll-margin-top:80px}
       </div>
     </div>
   </div>
-  <div class="hero__scroll">
+  <div class="hero__scroll" aria-hidden="true">
     <div class="hero__scroll-line"></div>
     <span class="hero__scroll-text">Scroll</span>
   </div>
 </section>
+
+<!-- ══ TRUST BANNER ══════════════════════════════ -->
+<div class="trust">
+  <div class="container">
+    <div class="trust__inner">
+      <div class="trust__item">
+        <div class="trust__icon">⚖</div>
+        <div>
+          <span class="trust__num">32 Yrs</span>
+          <span class="trust__label">Legal Expertise</span>
+        </div>
+      </div>
+      <div class="trust__divider" aria-hidden="true"></div>
+      <div class="trust__item">
+        <div class="trust__icon">🏆</div>
+        <div>
+          <span class="trust__num">Top Rated</span>
+          <span class="trust__label">Saudi Law Firm 2024</span>
+        </div>
+      </div>
+      <div class="trust__divider" aria-hidden="true"></div>
+      <div class="trust__item">
+        <div class="trust__icon">🌐</div>
+        <div>
+          <span class="trust__num">Bilingual</span>
+          <span class="trust__label">Arabic & English</span>
+        </div>
+      </div>
+      <div class="trust__divider" aria-hidden="true"></div>
+      <div class="trust__item">
+        <div class="trust__icon">🔒</div>
+        <div>
+          <span class="trust__num">100%</span>
+          <span class="trust__label">Confidential</span>
+        </div>
+      </div>
+      <div class="trust__divider" aria-hidden="true"></div>
+      <div class="trust__item">
+        <div class="trust__icon">⚡</div>
+        <div>
+          <span class="trust__num">24 Hrs</span>
+          <span class="trust__label">Response Guarantee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ ABOUT TEASER ══════════════════════════════ -->
 <section class="section about-teaser" id="about">
@@ -518,7 +992,7 @@ section[id]{scroll-margin-top:80px}
         <h2 class="cta-banner__title">Have a Legal Question? Our Experts Are Ready to Help.</h2>
         <p class="cta-banner__sub">Speak with a senior attorney — no junior staff, no call centres.</p>
       </div>
-      <a href="#consultation" class="btn btn--gold" style="white-space:nowrap">Ask an Expert →</a>
+      <a href="#consultation" class="btn btn--gold">Ask an Expert →</a>
     </div>
   </div>
 </div>
@@ -532,25 +1006,25 @@ section[id]{scroll-margin-top:80px}
       <p class="section-sub">A straightforward, four-step process designed to get you the outcome you need — with complete transparency at every stage.</p>
     </div>
     <div class="grid-4" style="margin-top:48px">
-      <div class="animate" style="text-align:center;padding:32px 24px;border:1px solid var(--border);border-radius:var(--radius);position:relative">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--purple);color:var(--white);font-family:var(--serif);font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">1</div>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--dark);margin-bottom:10px">Schedule a Time</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--mid);font-weight:300">Book your complimentary consultation at a time that suits you — in person, by phone, or via video call.</p>
+      <div class="process-card animate">
+        <div class="process-num">1</div>
+        <h3>Schedule a Time</h3>
+        <p>Book your complimentary consultation at a time that suits you — in person, by phone, or via video call.</p>
       </div>
-      <div class="animate animate-delay-1" style="text-align:center;padding:32px 24px;border:1px solid var(--border);border-radius:var(--radius)">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--purple);color:var(--white);font-family:var(--serif);font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">2</div>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--dark);margin-bottom:10px">Meet a Consultant</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--mid);font-weight:300">Speak directly with a senior attorney who specializes in your area of concern — not a paralegal or intake officer.</p>
+      <div class="process-card animate animate-delay-1">
+        <div class="process-num">2</div>
+        <h3>Meet a Consultant</h3>
+        <p>Speak directly with a senior attorney who specializes in your area of concern — not a paralegal or intake officer.</p>
       </div>
-      <div class="animate animate-delay-2" style="text-align:center;padding:32px 24px;border:1px solid var(--border);border-radius:var(--radius)">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--purple);color:var(--white);font-family:var(--serif);font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">3</div>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--dark);margin-bottom:10px">Strategic Planning</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--mid);font-weight:300">Receive a clear legal roadmap with realistic timelines, available options, and honest assessments of likely outcomes.</p>
+      <div class="process-card animate animate-delay-2">
+        <div class="process-num">3</div>
+        <h3>Strategic Planning</h3>
+        <p>Receive a clear legal roadmap with realistic timelines, available options, and honest assessments of likely outcomes.</p>
       </div>
-      <div class="animate animate-delay-3" style="text-align:center;padding:32px 24px;border:1px solid var(--border);border-radius:var(--radius)">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--white);font-family:var(--serif);font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">4</div>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--dark);margin-bottom:10px">Successful Resolution</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--mid);font-weight:300">We pursue your matter through to conclusion — negotiated settlement, arbitration, or courtroom victory.</p>
+      <div class="process-card animate animate-delay-3">
+        <div class="process-num process-num--gold">4</div>
+        <h3>Successful Resolution</h3>
+        <p>We pursue your matter through to conclusion — negotiated settlement, arbitration, or courtroom victory.</p>
       </div>
     </div>
   </div>
@@ -574,10 +1048,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Jackson Bauer</div>
           <div class="attorney-card__role">Finance Lawyer</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -590,10 +1064,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Stephanie Reilly</div>
           <div class="attorney-card__role">Criminal Defence Lawyer</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -606,10 +1080,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Matthew Webb</div>
           <div class="attorney-card__role">Tax Lawyer</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -622,10 +1096,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Aisha Al-Rashidi</div>
           <div class="attorney-card__role">Corporate Law Partner</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -638,10 +1112,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Omar Al-Mansouri</div>
           <div class="attorney-card__role">Family Law Specialist</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -654,10 +1128,10 @@ section[id]{scroll-margin-top:80px}
           <div class="attorney-card__name">Nadia Karimov</div>
           <div class="attorney-card__role">International Law Senior Counsel</div>
           <div class="attorney-card__socials">
-            <a href="#" class="social-btn">f</a>
-            <a href="#" class="social-btn">𝕏</a>
-            <a href="#" class="social-btn">in</a>
-            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="X/Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="Email">✉</a>
           </div>
         </div>
       </div>
@@ -666,7 +1140,7 @@ section[id]{scroll-margin-top:80px}
 </section>
 
 <!-- ══ STATS ══════════════════════════════════════ -->
-<section class="stats-section">
+<section class="stats-section" aria-label="Key statistics">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item animate">
@@ -701,14 +1175,14 @@ section[id]{scroll-margin-top:80px}
       <h2 class="section-title">What Our Clients Say</h2>
       <p class="section-sub">We let our outcomes speak. But occasionally, our clients speak for us.</p>
     </div>
-    <div class="testimonial-slider animate">
+    <div class="testimonial-slider animate" role="region" aria-label="Client testimonials">
       <div class="testimonial-track" id="testimonialTrack">
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="testimonial-card__text">"Jumana's team handled our commercial dispute with extraordinary professionalism. They secured a favorable outcome in a matter we were told could drag on for years. I recommend them without reservation — they are in a class of their own."</p>
             <div class="testimonial-card__author">
-              <div class="testimonial-card__avatar">K</div>
+              <div class="testimonial-card__avatar" aria-hidden="true">K</div>
               <div>
                 <div class="testimonial-card__name">Khalid Al-Rashidi</div>
                 <div class="testimonial-card__title">CEO, Al-Rashidi Trading Co.</div>
@@ -718,10 +1192,10 @@ section[id]{scroll-margin-top:80px}
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="testimonial-card__text">"When our company faced a complex cross-border regulatory matter, Jumana navigated every layer of Saudi and international law with confidence and clarity. Their bilingual team was invaluable. We could not have achieved this result without them."</p>
             <div class="testimonial-card__author">
-              <div class="testimonial-card__avatar">S</div>
+              <div class="testimonial-card__avatar" aria-hidden="true">S</div>
               <div>
                 <div class="testimonial-card__name">Sarah Mitchell</div>
                 <div class="testimonial-card__title">General Counsel, Nexus International</div>
@@ -731,10 +1205,10 @@ section[id]{scroll-margin-top:80px}
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="testimonial-card__text">"During what was the most difficult period of my life, the family law team at Jumana handled my case with genuine compassion alongside exceptional legal precision. My children's futures were protected because of their commitment."</p>
             <div class="testimonial-card__author">
-              <div class="testimonial-card__avatar">F</div>
+              <div class="testimonial-card__avatar" aria-hidden="true">F</div>
               <div>
                 <div class="testimonial-card__name">Fatima Al-Zahrani</div>
                 <div class="testimonial-card__title">Private Client, Riyadh</div>
@@ -746,10 +1220,10 @@ section[id]{scroll-margin-top:80px}
     </div>
     <div class="slider-controls">
       <button class="slider-btn" id="prevBtn" aria-label="Previous testimonial">←</button>
-      <div class="slider-dots">
-        <button class="dot active" data-index="0"></button>
-        <button class="dot" data-index="1"></button>
-        <button class="dot" data-index="2"></button>
+      <div class="slider-dots" role="tablist" aria-label="Testimonial navigation">
+        <button class="dot active" data-index="0" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+        <button class="dot" data-index="1" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+        <button class="dot" data-index="2" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
       </div>
       <button class="slider-btn" id="nextBtn" aria-label="Next testimonial">→</button>
     </div>
@@ -763,52 +1237,52 @@ section[id]{scroll-margin-top:80px}
       <div class="animate">
         <span class="tag">FAQ</span>
         <h2 class="section-title" style="margin-bottom:12px">Frequently Asked Questions</h2>
-        <p style="font-size:15px;line-height:1.75;color:var(--mid);font-weight:300;margin-bottom:32px">Can't find an answer? Contact us directly and a member of our team will respond within one business day.</p>
+        <p style="font-size:15px;line-height:1.78;color:var(--mid);font-weight:300;margin-bottom:32px">Can't find an answer? Contact us directly and a member of our team will respond within one business day.</p>
         <a href="#contact" class="btn btn--outline">Contact Our Team</a>
       </div>
       <div class="animate animate-delay-1">
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             How do I get started with Jumana?
-            <span class="faq-icon">+</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" role="region">
             <p class="faq-answer-text">Begin by submitting your consultation request online or calling our office directly. A dedicated case manager will contact you within 24 hours to schedule your first meeting with a senior attorney who specializes in your area of concern.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             Do you offer virtual consultations?
-            <span class="faq-icon">+</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" role="region">
             <p class="faq-answer-text">Yes. We accommodate in-person, telephone, and video consultations to serve clients across the Kingdom and internationally. We use secure, encrypted platforms for all virtual meetings to ensure complete confidentiality.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             How is attorney-client confidentiality maintained?
-            <span class="faq-icon">+</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" role="region">
             <p class="faq-answer-text">All communications with Jumana are fully protected under Saudi attorney-client privilege. We use secure, encrypted channels for all digital correspondence and maintain strict internal protocols that limit access to your case to only the attorneys directly working on your matter.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             What is your fee structure?
-            <span class="faq-icon">+</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" role="region">
             <p class="faq-answer-text">Fees vary by matter complexity and service type. We offer fixed-fee arrangements for defined-scope work, hourly billing for ongoing advisory, and in certain civil matters, contingency-based structures. All pricing is discussed transparently at your first consultation — no hidden charges.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
             Do you handle matters outside Saudi Arabia?
-            <span class="faq-icon">+</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" role="region">
             <p class="faq-answer-text">Yes. Our International Law practice handles cross-border transactions, international arbitration, and multi-jurisdictional matters. We maintain relationships with leading law firms across the GCC, Europe, and North America to provide seamless international representation.</p>
           </div>
         </div>
@@ -835,24 +1309,24 @@ section[id]{scroll-margin-top:80px}
           <li>20 hours in court per month</li>
           <li>25 attorney meetings included</li>
           <li>Dedicated case manager</li>
-          <li>Contract drafting & review</li>
+          <li>Contract drafting &amp; review</li>
           <li>100% success commitment</li>
         </ul>
-        <a href="#consultation" class="btn btn--outline" style="width:100%;justify-content:center">Learn More</a>
+        <a href="#consultation" class="btn btn--outline" style="width:100%;justify-content:center">Get Started</a>
       </div>
       <div class="pricing-card pricing-card--featured animate animate-delay-1">
         <div class="pricing-card__icon">🏛</div>
         <div class="pricing-card__title">Banking &amp; Finance</div>
-        <div class="pricing-card__price" style="color:var(--white)"><sup style="color:rgba(255,255,255,.6)">SAR</sup>2,850</div>
-        <div class="pricing-card__period" style="color:rgba(255,255,255,.5)">per month</div>
-        <ul class="pricing-features" style="border-color:rgba(255,255,255,.1)">
-          <li style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)">20 hours in court per month</li>
-          <li style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)">25 attorney meetings included</li>
-          <li style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)">Priority response within 2 hours</li>
-          <li style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)">Regulatory advisory included</li>
-          <li style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)">100% success commitment</li>
+        <div class="pricing-card__price"><sup>SAR</sup>2,850</div>
+        <div class="pricing-card__period">per month</div>
+        <ul class="pricing-features">
+          <li>20 hours in court per month</li>
+          <li>25 attorney meetings included</li>
+          <li>Priority response within 2 hours</li>
+          <li>Regulatory advisory included</li>
+          <li>100% success commitment</li>
         </ul>
-        <a href="#consultation" class="btn btn--gold" style="width:100%;justify-content:center">Learn More</a>
+        <a href="#consultation" class="btn btn--gold" style="width:100%;justify-content:center">Get Started</a>
       </div>
       <div class="pricing-card animate animate-delay-2">
         <div class="pricing-card__icon">🏠</div>
@@ -866,12 +1340,11 @@ section[id]{scroll-margin-top:80px}
           <li>Title verification service</li>
           <li>100% success commitment</li>
         </ul>
-        <a href="#consultation" class="btn btn--outline" style="width:100%;justify-content:center">Learn More</a>
+        <a href="#consultation" class="btn btn--outline" style="width:100%;justify-content:center">Get Started</a>
       </div>
     </div>
   </div>
 </section>
-<style>.pricing-card--featured{background:linear-gradient(160deg,var(--purple-dark),var(--purple));border-color:var(--purple)}.pricing-card--featured .pricing-features li::before{color:var(--gold)}</style>
 
 <!-- ══ CONSULTATION FORM ══════════════════════════ -->
 <section class="consultation" id="consultation">
@@ -892,22 +1365,22 @@ section[id]{scroll-margin-top:80px}
       <div class="consultation__form animate animate-delay-2">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input class="form-input" type="text" placeholder="Your full name">
+            <label class="form-label" for="fullName">Full Name</label>
+            <input class="form-input" type="text" id="fullName" placeholder="Your full name" autocomplete="name">
           </div>
           <div class="form-group">
-            <label class="form-label">Phone Number</label>
-            <input class="form-input" type="tel" placeholder="+966 XX XXX XXXX">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input class="form-input" type="tel" id="phone" placeholder="+966 XX XXX XXXX" autocomplete="tel">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input class="form-input" type="email" placeholder="your@email.com">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" placeholder="your@email.com" autocomplete="email">
           </div>
           <div class="form-group">
-            <label class="form-label">Practice Area</label>
-            <select class="form-select form-input">
+            <label class="form-label" for="practiceArea">Practice Area</label>
+            <select class="form-select form-input" id="practiceArea">
               <option value="">Select a practice area</option>
               <option>Banking &amp; Finance</option>
               <option>Family Law</option>
@@ -922,15 +1395,15 @@ section[id]{scroll-margin-top:80px}
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Subject</label>
-          <input class="form-input" type="text" placeholder="Brief subject line">
+          <label class="form-label" for="subject">Subject</label>
+          <input class="form-input" type="text" id="subject" placeholder="Brief subject line">
         </div>
         <div class="form-group">
-          <label class="form-label">Describe Your Matter</label>
-          <textarea class="form-textarea" placeholder="Please describe your legal matter in as much detail as you are comfortable sharing at this stage..."></textarea>
+          <label class="form-label" for="message">Describe Your Matter</label>
+          <textarea class="form-textarea" id="message" placeholder="Please describe your legal matter in as much detail as you are comfortable sharing at this stage..."></textarea>
         </div>
-        <button class="form-submit" onclick="handleFormSubmit(this)">Request My Consultation →</button>
-        <p style="font-size:12px;color:rgba(255,255,255,.3);margin-top:12px;text-align:center">Your information is kept strictly confidential and protected by attorney-client privilege.</p>
+        <button class="form-submit" id="formSubmitBtn" onclick="handleFormSubmit(this)">Request My Consultation →</button>
+        <p class="form-note">Your information is kept strictly confidential and protected by attorney-client privilege.</p>
       </div>
     </div>
   </div>
@@ -945,7 +1418,7 @@ section[id]{scroll-margin-top:80px}
       <p class="section-sub">Practical guidance on Saudi law, regulatory changes, and legal strategies — written by practitioners, not press officers.</p>
     </div>
     <div class="grid-3">
-      <div class="blog-card animate">
+      <article class="blog-card animate">
         <div class="blog-card__thumb">
           <span class="blog-card__thumb-icon">⚖</span>
           <span class="blog-card__thumb-cat">Corporate Law</span>
@@ -956,8 +1429,8 @@ section[id]{scroll-margin-top:80px}
           <p class="blog-card__excerpt">Understanding what a senior attorney needs from you — and what you should expect in return — can make the difference between a productive first meeting and a wasted one.</p>
           <a href="#" class="blog-card__link">Read More →</a>
         </div>
-      </div>
-      <div class="blog-card animate animate-delay-1">
+      </article>
+      <article class="blog-card animate animate-delay-1">
         <div class="blog-card__thumb">
           <span class="blog-card__thumb-icon">📜</span>
           <span class="blog-card__thumb-cat">Business Law</span>
@@ -968,8 +1441,8 @@ section[id]{scroll-margin-top:80px}
           <p class="blog-card__excerpt">Recent amendments to Saudi Arabia's commercial court procedures introduce significant changes to how business disputes are filed, heard, and resolved in the Kingdom.</p>
           <a href="#" class="blog-card__link">Read More →</a>
         </div>
-      </div>
-      <div class="blog-card animate animate-delay-2">
+      </article>
+      <article class="blog-card animate animate-delay-2">
         <div class="blog-card__thumb">
           <span class="blog-card__thumb-icon">🏛</span>
           <span class="blog-card__thumb-cat">Civil &amp; Criminal</span>
@@ -980,7 +1453,7 @@ section[id]{scroll-margin-top:80px}
           <p class="blog-card__excerpt">Filing a civil claim in Saudi Arabia requires a precise understanding of procedural law. Our litigation team explains the process step by step — from documentation to judgment.</p>
           <a href="#" class="blog-card__link">Read More →</a>
         </div>
-      </div>
+      </article>
     </div>
     <div style="text-align:center;margin-top:48px">
       <a href="#" class="btn btn--outline">View All Articles →</a>
@@ -991,12 +1464,12 @@ section[id]{scroll-margin-top:80px}
 <!-- ══ CONTACT ════════════════════════════════════ -->
 <section class="contact-section" id="contact">
   <div class="container">
-    <div class="grid-2" style="gap:72px;align-items:start">
+    <div class="grid-2 contact-grid" style="gap:72px;align-items:start">
       <div class="animate">
         <span class="tag">Contact Us</span>
         <h2 class="section-title">Have a Question?<br>Let's Talk.</h2>
         <p class="section-sub" style="margin-bottom:36px">Whether you need urgent legal counsel or want to understand your options before committing, our team is ready to listen.</p>
-        <div class="contact-info" style="grid-template-columns:1fr;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr;gap:16px">
           <div class="contact-card">
             <div class="contact-card__icon">📞</div>
             <div>
@@ -1008,7 +1481,7 @@ section[id]{scroll-margin-top:80px}
             <div class="contact-card__icon">📍</div>
             <div>
               <div class="contact-card__label">Physical Address</div>
-              <div class="contact-card__value">69 W. Flemington Road<br>Fairfax, AL 38321</div>
+              <div class="contact-card__value">69831 Motal St. Khebar 39852<br>Saudi Arabia</div>
             </div>
           </div>
           <div class="contact-card">
@@ -1022,7 +1495,7 @@ section[id]{scroll-margin-top:80px}
             <div class="contact-card__icon">🕐</div>
             <div>
               <div class="contact-card__label">Opening Hours</div>
-              <div class="contact-card__value">Mon–Fri  09:00 AM – 09:00 PM<br>Sat–Sun  12:00 PM – 02:00 PM</div>
+              <div class="contact-card__value">Mon–Fri &nbsp; 09:00 AM – 09:00 PM<br>Sat–Sun &nbsp; 12:00 PM – 02:00 PM</div>
             </div>
           </div>
         </div>
@@ -1032,7 +1505,7 @@ section[id]{scroll-margin-top:80px}
           <div class="map-placeholder">
             <div class="map-placeholder__icon">📍</div>
             <div class="map-placeholder__text">Google Maps Embed</div>
-            <p style="font-size:12px;margin-top:8px;opacity:.5">Replace with live Google Maps iframe</p>
+            <p style="font-size:12px;margin-top:8px;opacity:.45">Replace with live Google Maps iframe</p>
           </div>
         </div>
       </div>
@@ -1040,7 +1513,7 @@ section[id]{scroll-margin-top:80px}
   </div>
 </section>
 
-<!-- ══ CTA BANNER 2 ══════════════════════════════ -->
+<!-- ══ CTA BANNER 2 ═══════════════════════════════ -->
 <div class="cta-banner">
   <div class="container">
     <div class="cta-banner__inner">
@@ -1048,7 +1521,7 @@ section[id]{scroll-margin-top:80px}
         <h2 class="cta-banner__title">Have Legal Questions? Ask Our Experts!</h2>
         <p class="cta-banner__sub">Confidential. No obligation. Response within 24 hours.</p>
       </div>
-      <a href="#consultation" class="btn btn--ghost" style="white-space:nowrap;border-color:rgba(255,255,255,.5)">Ask an Expert →</a>
+      <a href="#consultation" class="btn btn--ghost">Ask an Expert →</a>
     </div>
   </div>
 </div>
@@ -1126,70 +1599,117 @@ section[id]{scroll-margin-top:80px}
 </footer>
 
 <script>
-// ── Header scroll effect ──────────────────
-const header=document.getElementById('header');
-window.addEventListener('scroll',()=>{
-  header.classList.toggle('scrolled',window.scrollY>60);
+// ── Header scroll effect ──────────────────────────
+const header = document.getElementById('header');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const current = window.scrollY;
+  header.classList.toggle('scrolled', current > 60);
+  lastScroll = current;
+}, { passive: true });
+
+// ── Mobile nav toggle ─────────────────────────────
+const mobileBtn = document.getElementById('mobileBtn');
+const mobileNav = document.getElementById('mobileNav');
+let navOpen = false;
+
+mobileBtn.addEventListener('click', () => {
+  navOpen = !navOpen;
+  mobileNav.classList.toggle('open', navOpen);
+  mobileBtn.classList.toggle('active', navOpen);
+  mobileBtn.setAttribute('aria-expanded', navOpen);
+  document.body.style.overflow = navOpen ? 'hidden' : '';
 });
 
-// ── Mobile nav ────────────────────────────
-const mobileBtn=document.getElementById('mobileBtn');
-const mobileNav=document.getElementById('mobileNav');
-let navOpen=false;
-mobileBtn.addEventListener('click',()=>{
-  navOpen=!navOpen;
-  mobileNav.classList.toggle('open',navOpen);
-  document.body.style.overflow=navOpen?'hidden':'';
-});
-function closeMobile(){
-  navOpen=false;mobileNav.classList.remove('open');
-  document.body.style.overflow='';
+function closeMobile() {
+  navOpen = false;
+  mobileNav.classList.remove('open');
+  mobileBtn.classList.remove('active');
+  mobileBtn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
 }
 
-// ── Testimonial slider ────────────────────
-const track=document.getElementById('testimonialTrack');
-const dots=document.querySelectorAll('.dot');
-let current=0,total=3;
-let autoSlide=setInterval(()=>goTo((current+1)%total),5000);
-function goTo(idx){
-  current=idx;
-  track.style.transform=`translateX(-${current*100}%)`;
-  dots.forEach((d,i)=>d.classList.toggle('active',i===current));
-}
-document.getElementById('prevBtn').addEventListener('click',()=>{clearInterval(autoSlide);goTo((current-1+total)%total)});
-document.getElementById('nextBtn').addEventListener('click',()=>{clearInterval(autoSlide);goTo((current+1)%total)});
-dots.forEach(d=>d.addEventListener('click',()=>{clearInterval(autoSlide);goTo(+d.dataset.index)}));
-
-// ── FAQ toggle ────────────────────────────
-function toggleFaq(btn){
-  const item=btn.closest('.faq-item');
-  const isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
-  if(!isOpen)item.classList.add('open');
-}
-
-// ── Scroll animations ─────────────────────
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.12});
-document.querySelectorAll('.animate').forEach(el=>observer.observe(el));
-
-// ── Nav active on scroll ──────────────────
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('nav a');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
-  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+// Close on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && navOpen) closeMobile();
 });
 
-// ── Form submit ───────────────────────────
-function handleFormSubmit(btn){
-  btn.textContent='Sending...';btn.disabled=true;
-  setTimeout(()=>{
-    btn.textContent='✓  Request Sent — We\'ll Contact You Within 24 Hours';
-    btn.style.background='#2d8a4e';
-  },1400);
+// ── Testimonial slider ────────────────────────────
+const track = document.getElementById('testimonialTrack');
+const dots = document.querySelectorAll('.dot');
+let current = 0, total = 3;
+let autoSlide = setInterval(() => goTo((current + 1) % total), 5500);
+
+function goTo(idx) {
+  current = idx;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+    d.setAttribute('aria-selected', i === current);
+  });
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  clearInterval(autoSlide);
+  goTo((current - 1 + total) % total);
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  clearInterval(autoSlide);
+  goTo((current + 1) % total);
+});
+dots.forEach(d => d.addEventListener('click', () => {
+  clearInterval(autoSlide);
+  goTo(+d.dataset.index);
+}));
+
+// Touch/swipe support for testimonials
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    clearInterval(autoSlide);
+    goTo(diff > 0 ? (current + 1) % total : (current - 1 + total) % total);
+  }
+}, { passive: true });
+
+// ── FAQ toggle ────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// ── Scroll animations ─────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+// ── Nav active on scroll ──────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+}, { passive: true });
+
+// ── Form submit ───────────────────────────────────
+function handleFormSubmit(btn) {
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✓  Request Sent — We\'ll Contact You Within 24 Hours';
+    btn.style.background = '#2d8a4e';
+  }, 1400);
 }
 </script>
 </body>
